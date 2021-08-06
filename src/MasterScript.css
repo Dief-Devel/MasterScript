@@ -1,5 +1,4 @@
 /* CSS */
-
 .qv-object-aeRWizard > .qv-object-nav{
   display: none;
 }
@@ -33,8 +32,8 @@
 }
 
 .wizarddialog {
-	min-width: 900px;
-	max-width: 900px;
+	min-width: 1200px;
+	max-width: 1200px;
 	min-height: 90%;
 	max-height: 90%;
 }
@@ -48,33 +47,50 @@
 }
 
 
-.column1 {
-  width:25%;
+.colTitle {
+  width:20%;
   float:left;
   clear:none;
 }
 
-.column2 {
+.colType {
   width:10%;
   float:left;
   clear:none;
 }
 
-.column3 {
-  width:17%;
+.colExpression {
+  width:20%;
+  padding: 0px 3px;
   float:left;
   clear:none;
 }
 
-.column4 {
+.colLabelExpression {
+  width:10%;
+  padding: 0px 3px;
+  float:left;
+  clear:none;
+}
+
+.colFormat {
+  width:15%;
+  float:left;
+  clear:none;
+}
+.colFormatItem {
+float: left;
+}
+
+.colColor {
   width:10%;
   float:left;
   clear:none;
   text-align: center;
 }
 
-.column5 {
-  width:10%;
+.colStatus {
+  width:5%;
   float:left;
   clear:none;
   font-weight: bold;
@@ -101,14 +117,14 @@
 .fieldoval {
   background-color: #E6E6E6;
   border-radius: 10px;
-  padding-left:9px;
-  padding-right: 9px;
+  padding-left: 6px;
+  padding-right: 6px;
   padding-top: 1px;
   padding-bottom: 1px;
   border: 1px solid #CCCCCC;
   float:left;
   clear:both;
-  margin: 1px 0;
+  margin: 1px 1px;
 }
 
 .rowHeight {
