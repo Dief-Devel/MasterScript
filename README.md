@@ -39,7 +39,7 @@ The fields have a "_" prefix so this can be combined with the ___set HidePrefix 
 * _MasterItemExpression(2...n)
   * Additional fields, when required for a Drill-down Dimension should be added as extra columns using a sequential number in the field title
 * _MasterItemNumberFormat
-  * You can specify a number format in the form \<qType\>|\<qFmt\> (only works in master measures)<br>
+  * You can specify a number format in the form \<qType\>|\<qFmt\> (only works in master measures)  
   Valid options (combinations must match, so for example "D|$#,##0.00" won´t work)
     * qType:
     	* "U" - unknown (qFmt is ignored) 
