@@ -38,11 +38,22 @@ The fields have a "_" prefix so this can be combined with the ___set HidePrefix 
   * The Field name or expression for the measure or dimension
 * _MasterItemExpression(2...n)
   * Additional fields, when required for a Drill-down Dimension should be added as extra columns using a sequential number in the field title
-* __MasterItemNumberFormat
-  * You can specify a number format in the form <qType>|<qFmt> 
-  Valid options (combinations must match, so for example F|$#,##0.00 won´t work)
-	qType: "U" - unknown (qFmt is ignored) / "F" - Numbers / "M" - Money / "D" - Dates and Timestamps / "IV" - Interval (Time only) / "R" - Real numbers/user defined)
-	qFmt: $#,##0.00;($#,##0.00) / YYYY-MM-DD h:mm:ss[.fff] / h:mm:ss / 0.00% / ...
+* _MasterItemNumberFormat
+  * You can specify a number format in the form \<qType\>|\<qFmt\> (only works in master measures)  
+  Valid options (combinations must match, so for example "D|$#,##0.00" won´t work)
+    * qType:
+    	* "U" - unknown (qFmt is ignored) 
+    	* "F" - Numbers 
+    	* "M" - Money
+    	* "D" - Dates and Timestamps 
+    	* "IV" - Interval (Time only) 
+    	* "R" - Real numbers/user defined 
+    * qFmt:
+    	* "$#,##0.00;($#,##0.00)"
+    	* "YYYY-MM-DD h:mm:ss[.fff]" 
+    	* "h:mm:ss" 
+    	* "0.00%" 
+    	* ...other possible format strings
 
 ## Once Imported
 When you have imported, the extension can be deleted, you can also remove the data table from your script too. If you need to update the master items, just load the extension again (if you have deleted it from the sheet) and update from the source data.
