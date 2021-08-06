@@ -290,10 +290,21 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 									}
 									
 									var vqNumberType = [];
-									if(typeof row.cells[numberFormatCol] != 'undefined'){
-										vqNumberType = row.cells[numberFormatCol].qText.split("|");
-										vqNumberType = vqNumberType.filter(a => a !== '-');										
-										//console.log(vqNumberType);
+									var vqType = '';
+									var vqFormatString ='';
+									if(typeof row.cells[numberFormatCol] != 'undefined' && rowDisplay == 'Measure'){
+									// checks if value contains any invalid character
+										if(/[UIRFMDA-]/.test(row.cells[numberFormatCol].qText)) {
+											vqNumberType = row.cells[numberFormatCol].qText.split("|");
+											vqNumberType = vqNumberType.filter(a => a !== '-');	
+											vqType = vqNumberType[0];
+											vqFormatString = vqNumberType[1];
+											//console.log(vqNumberType);
+										} 
+										else {  
+											error = true;
+											errors.push('_MasterItemID: '+ idValue +' number format '+ row.cells[numberFormatCol].qText +' is invalid');											
+										}
 									}
 
 									if(!(rowDisplay == 'Dimension' || rowDisplay == 'Measure')){
@@ -321,7 +332,8 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 										fields: fieldsList,
 										tags: tagsList,
 										msId: idValue,
-										numberFormat: vqNumberType,
+										numberFormat: vqType,
+										numberFormatString: vqFormatString,
 										status: "Pending",
 										processed: prevProcessed,
 										error: error,
@@ -476,8 +488,8 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 									qLabelExpression:t.labelExpression,
 									coloring:colorBlock,
 									qNumFormat: {
-										qType:t.numberFormat[0],
-										qFmt:t.numberFormat[1],
+										qType:t.numberFormat,
+										qFmt:t.numberFormatString,
 									},
 								},
 								qMetaDef: {
