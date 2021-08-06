@@ -218,6 +218,7 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 								var tagCol = table.getColByName('_MasterItemTags');
 								var countCol = table.getColByName('_KeyCount');
 								var labelExpCol = table.getColByName('_MasterItemLabel');
+								var numberFormatCol = table.getColByName('_MasterItemNumberFormat');
 								//console.log("Accumulate Column: " + accumulateCol);
 
 
@@ -272,6 +273,7 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 										tagsList = row.cells[tagCol].qText.split(";");
 										tagsList = tagsList.filter(a => a !== '-');
 										tagsList.push(idValue);
+										//console.log(tagsList);
 									}
 
 									var rowDisplay;
@@ -285,6 +287,13 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 										if(labelExp == '-'){
 											labelExp = '';
 										}
+									}
+									
+									var vqNumberType = [];
+									if(typeof row.cells[numberFormatCol] != 'undefined'){
+										vqNumberType = row.cells[numberFormatCol].qText.split("|");
+										vqNumberType = vqNumberType.filter(a => a !== '-');										
+										//console.log(vqNumberType);
 									}
 
 									if(!(rowDisplay == 'Dimension' || rowDisplay == 'Measure')){
@@ -312,6 +321,7 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 										fields: fieldsList,
 										tags: tagsList,
 										msId: idValue,
+										numberFormat: vqNumberType,
 										status: "Pending",
 										processed: prevProcessed,
 										error: error,
@@ -451,7 +461,7 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 									}
 								};
 							}
-
+							console.log(t.numberFormat[1]);
 							var mesJSON =
 							{
 								qInfo: {
@@ -464,7 +474,11 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 									qExpressions:[],
 									qActiveExpression: 0,
 									qLabelExpression:t.labelExpression,
-									coloring:colorBlock
+									coloring:colorBlock,
+									qNumFormat: {
+										qType:t.numberFormat[0],
+										qFmt:t.numberFormat[1],
+									},
 								},
 								qMetaDef: {
 									title:t.displayName,
@@ -473,7 +487,7 @@ function ( qlik, template, definition, dialogTemplate, cssStyle, Util) {
 									masterScriptId:t.msId
 								}
 							};
-
+							
 							if(!t.error){
 								if($scope.checkMes(t)){
 									//console.log("Updating: "+ t.qId);
